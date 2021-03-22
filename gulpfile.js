@@ -28,10 +28,7 @@ function downloadDragonTail() {
 
 function extractFiles() {
   const path = `./temp/dragontail-${version}.tgz`;
-  return gulp
-    .src(path)
-    .pipe(decompress({ strip: 1 }))
-    .pipe(gulp.dest("temp/extract"));
+  return gulp.src(path).pipe(decompress()).pipe(gulp.dest("temp/extract"));
 }
 
 function convertFiles() {
