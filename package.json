@@ -1,0 +1,19 @@
+{
+  "name": "ddragon-webp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ddragon": "^3.3.4",
+    "gulp": "^4.0.2",
+    "gulp-decompress": "^3.0.0",
+    "gulp-download2": "^1.1.0",
+    "gulp-webp": "^4.0.1",
+    "node-fetch": "^2.6.1"
+  }
+}
