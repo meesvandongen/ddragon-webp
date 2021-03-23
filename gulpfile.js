@@ -1,10 +1,11 @@
 const gulp = require("gulp");
-const { series } = require("gulp");
+const { series, dest } = require("gulp");
 const webp = require("gulp-webp");
 const download = require("gulp-download2");
 const Ddragon = require("ddragon");
 const fetch = require("node-fetch");
 const decompress = require("gulp-decompress");
+var fs = require("fs");
 
 let dd = new Ddragon();
 
@@ -22,13 +23,17 @@ function downloadDdVersion(done) {
 
 function downloadDragonTail() {
   return download(
-    `https://ddragon.leagueoflegends.com/cdn/dragontail-${version}.tgz`
+    `https://ddragon.leagueoflegends.com/cdn/dragontail-${version}.tgz`,
   ).pipe(gulp.dest("./temp"));
 }
 
 function extractFiles() {
   const path = `./temp/dragontail-${version}.tgz`;
   return gulp.src(path).pipe(decompress()).pipe(gulp.dest("temp/extract"));
+}
+
+function moveVersioned(done) {
+  fs.rename(`./temp/extract/${version}/`, "./temp/extract/latest/", done);
 }
 
 function convertFiles() {
@@ -42,5 +47,6 @@ exports.default = series(
   downloadDdVersion,
   downloadDragonTail,
   extractFiles,
-  convertFiles
+  moveVersioned,
+  convertFiles,
 );
